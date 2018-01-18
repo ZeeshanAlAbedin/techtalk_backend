@@ -52,40 +52,7 @@ namespace techtalk2.Controllers
             return Ok(eventTable);
         }
 
-        // PUT: api/EventTables/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutEventTable(int id, EventTable eventTable)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != eventTable.ID)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(eventTable).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!EventTableExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
+        
 
         // POST: api/EventTables
         [ResponseType(typeof(EventTable))]
@@ -116,6 +83,30 @@ namespace techtalk2.Controllers
 
             return CreatedAtRoute("DefaultApi", new { id = eventTable.ID }, eventTable);
         }
+
+        //Update
+        [HttpPost]
+        public IHttpActionResult UpdateEventTable(int id, EventTable eventTable)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var updateEvents = from s in db.EventTables where s.ID == id select s;
+            foreach(EventTable e in updateEvents)
+            {
+                e.Ename = eventTable.Ename;
+                e.Pname = eventTable.Pname;
+                e.Edate = eventTable.Edate;
+            }
+            db.SaveChanges();
+            return Ok();
+        }
+
+
+
+
+
 
         // DELETE: api/EventTables/5
         [ResponseType(typeof(EventTable))]

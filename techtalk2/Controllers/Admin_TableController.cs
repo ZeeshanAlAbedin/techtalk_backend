@@ -9,9 +9,11 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using techtalk2;
+using System.Web.Http.Cors;
 
 namespace techtalk2.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class Admin_TableController : ApiController
     {
         private techtalk2Entities1 db = new techtalk2Entities1();
@@ -22,7 +24,7 @@ namespace techtalk2.Controllers
         {
             Admin_Table foundUser = db.Admin_Table.Where(a => a.Admin_username.Equals(user.Admin_username)).FirstOrDefault();
             if (foundUser == null)
-                return Ok("Username not found");
+                return NotFound();
             else if (foundUser != null && user.Admin_password.Equals(foundUser.Admin_password))
                 return Ok("Correct");
             else
