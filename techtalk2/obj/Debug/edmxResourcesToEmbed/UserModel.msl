@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="techtalk2Model2StoreContainer" CdmEntityContainer="techtalk2Entities2">
+    <EntitySetMapping Name="user_login">
+      <EntityTypeMapping TypeName="techtalk2Model2.user_login">
+        <MappingFragment StoreEntitySet="user_login">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="user_username" ColumnName="user_username" />
+          <ScalarProperty Name="user_password" ColumnName="user_password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

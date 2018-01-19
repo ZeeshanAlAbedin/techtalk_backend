@@ -28,14 +28,14 @@ namespace techtalk2.Controllers
             else if (foundUser != null && user.Admin_password.Equals(foundUser.Admin_password))
                 return Ok("Correct");
             else
-                return Ok("Password Incorrect");
+                return NotFound();
         }
 
 
 
-       
 
 
+        /*
 
         // GET: api/Admin_Table
         public IQueryable<Admin_Table> GetAdmin_Table()
@@ -135,5 +135,6 @@ namespace techtalk2.Controllers
         {
             return db.Admin_Table.Count(e => e.ID == id) > 0;
         }
+        */
     }
 }
