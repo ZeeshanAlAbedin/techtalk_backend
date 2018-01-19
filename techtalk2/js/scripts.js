@@ -1,3 +1,5 @@
+//SCRIPT PRESENT IN CORE
+
 var techtalk = angular.module('techtalk', []);
 
 //API URL for the server
@@ -247,14 +249,15 @@ techtalk.controller('RemoveEventController', function ($scope, $http) {
 techtalk.controller('UpdateEventController', function ($scope, $http) {
     $scope.updateEvent = function (eventID) {
         
-        var parameteres = $.param({
-            id: eventID,        
+        var updateData = {
+            //id: eventID,        
             Ename: $("#jqEname").val(),
             Pname: $("#jqPname").val(),
             Edate : $("#jqEdate").val()
-        });
-        console.log(parameteres);
-        $http.post(APIURL + '/UpdateEventTable', parameteres)
+            
+        };
+        console.log(updateData);
+        $http.put(APIURL + '/PutEventTable/'+eventID, updateData)
         .success(function (){
             alert("Updation successful");
         })

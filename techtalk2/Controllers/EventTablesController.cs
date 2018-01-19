@@ -39,6 +39,22 @@ namespace techtalk2.Controllers
             return db.EventTables;
         }
 
+
+        //PUT
+        public void PutEventTable(int id, EventTable ev)
+        {
+            var entity = db.EventTables.FirstOrDefault(e => e.ID == id);
+            entity.Ename = ev.Ename;
+            entity.Pname = ev.Pname;
+            entity.Edate = ev.Edate;
+            //entity.Edes = "NONE";
+            //entity.isPassed = false;
+            db.SaveChanges();
+        }
+
+
+
+
         // GET: api/EventTables/5
         [ResponseType(typeof(EventTable))]
         public IHttpActionResult GetEventTable(int id)
@@ -83,28 +99,6 @@ namespace techtalk2.Controllers
 
             return CreatedAtRoute("DefaultApi", new { id = eventTable.ID }, eventTable);
         }
-
-        //Update
-        [HttpPost]
-        public IHttpActionResult UpdateEventTable(int id, EventTable eventTable)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            var updateEvents = from s in db.EventTables where s.ID == id select s;
-            foreach(EventTable e in updateEvents)
-            {
-                e.Ename = eventTable.Ename;
-                e.Pname = eventTable.Pname;
-                e.Edate = eventTable.Edate;
-            }
-            db.SaveChanges();
-            return Ok();
-        }
-
-
-
 
 
 
